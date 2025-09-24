@@ -13,6 +13,7 @@ import javax.validation.constraints.*;
  * @Version: 1.0
  **/
 @Data
+
 public class User {
     // 用户名
     @NotBlank(message = "用户名不能为空") // 注解确保用户名不为空
