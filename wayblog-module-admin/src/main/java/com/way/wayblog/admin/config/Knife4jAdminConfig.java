@@ -1,4 +1,4 @@
-package com.way.wayblog.web.config;
+package com.way.wayblog.admin.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,25 +14,25 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 /**
  * @BelongsProject: wayblog-springboot
- * @BelongsPackage: com.way.wayblog.web.config
+ * @BelongsPackage: com.way.wayblog.admin.config
  * @Author: way
- * @CreateTime: 2025-09-24 22:49
- * @Description: Knife4j 配置类
+ * @CreateTime: 2025-09-24 22:56
+ * @Description: TODO
  * @Version: 1.0
  **/
 @Configuration
 @EnableSwagger2WebMvc
 @Profile("dev") // 只在 dev 环境中开启
-public class Knife4jConfig {
-    @Bean("webApi")
+public class Knife4jAdminConfig {
+    @Bean("adminApi")
     public Docket createApiDoc() {
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(buildApiInfo())
                 // 分组名称
-                .groupName("Web 前台接口")
+                .groupName("Admin 前台接口")
                 .select()
                 // 这里指定 Controller 扫描包路径
-                .apis(RequestHandlerSelectors.basePackage("com.way.wayblog.web.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.way.wayblog.admin.controller"))
                 .paths(PathSelectors.any())
                 .build();
         return docket;
@@ -45,7 +45,7 @@ public class Knife4jConfig {
      */
     private ApiInfo buildApiInfo() {
         return new ApiInfoBuilder()
-                .title("Wayblog 博客前台接口文档") // 标题
+                .title("Wayblog 博客 Admin 后台接口文档") // 标题
                 .description("Wayblog 是一款由 Spring Boot + Vue 3.2 + Vite 4.3 开发的前后端分离博客") // 描述
                 .termsOfServiceUrl("https://blog.csdn.net/wh1556080769?spm=1000.2115.3001.5343") // API 服务条款
                 .contact(new Contact("way", "https://blog.csdn.net/wh1556080769?spm=1000.2115.3001.5343", "1556080769@qq.com")) // 联系人
