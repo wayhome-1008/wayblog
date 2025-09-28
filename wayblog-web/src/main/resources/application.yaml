@@ -2,3 +2,8 @@ spring:
   profiles:
     # 默认激活 dev 环境
     active: dev
+jwt:
+  # 签发人
+  issuer: way
+  # 秘钥
+  secret: jqhAaIff8/UE05E8Dub2lVZPJvsFDDgwP9zbYR/8RwXsbrat+zFlcp2tEW3RZTld40v8Ufp+7OT0krpMc5oN8g==
