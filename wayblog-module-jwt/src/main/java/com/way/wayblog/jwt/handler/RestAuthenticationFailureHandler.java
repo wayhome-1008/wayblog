@@ -1,7 +1,7 @@
 package com.way.wayblog.jwt.handler;
 
 import com.way.wayblog.common.enums.ResponseCodeEnum;
-import com.way.wayblog.common.exception.UsernameOrPasswordNullException;
+import com.way.wayblog.jwt.exception.UsernameOrPasswordNullException;
 import com.way.wayblog.common.utils.Response;
 import com.way.wayblog.jwt.utils.ResultUtil;
 import lombok.extern.slf4j.Slf4j;

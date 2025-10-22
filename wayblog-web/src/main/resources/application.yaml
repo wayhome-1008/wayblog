@@ -7,3 +7,9 @@ jwt:
   issuer: way
   # 秘钥
   secret: jqhAaIff8/UE05E8Dub2lVZPJvsFDDgwP9zbYR/8RwXsbrat+zFlcp2tEW3RZTld40v8Ufp+7OT0krpMc5oN8g==
+  # token 过期时间（单位：分钟） 24*60
+  tokenExpireTime: 1440
+  # token 请求头中的 key 值
+  tokenHeaderKey: Authorization
+  # token 请求头中的 value 值前缀
+  tokenPrefix: Bearer

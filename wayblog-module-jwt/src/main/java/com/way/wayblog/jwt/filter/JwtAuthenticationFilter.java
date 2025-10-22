@@ -2,7 +2,7 @@ package com.way.wayblog.jwt.filter;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.way.wayblog.common.exception.UsernameOrPasswordNullException;
+import com.way.wayblog.jwt.exception.UsernameOrPasswordNullException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

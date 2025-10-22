@@ -1,5 +1,7 @@
-package com.way.wayblog.common.exception;
+package com.way.wayblog.jwt.exception;
 
+
+import org.springframework.security.core.AuthenticationException;
 
 /**
  *@Author: way
