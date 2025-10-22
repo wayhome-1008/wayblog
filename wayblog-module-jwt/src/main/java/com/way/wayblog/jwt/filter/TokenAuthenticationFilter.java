@@ -16,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -53,7 +52,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
         String header = request.getHeader(tokenHeaderKey);
 
         // 判断 value 值是否以 Bearer 开头
-        if (StringUtils.startsWith(header, tokenPrefix)){
+        if (StringUtils.startsWith(header, tokenPrefix)) {
             // 截取 Token 令牌
             String token = StringUtils.substring(header, 7);
             log.info("Token: {}", token);
@@ -63,7 +62,8 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
                 try {
                     // 校验 Token 是否可用, 若解析异常，针对不同异常做出不同的响应参数
                     jwtTokenHelper.validateToken(token);
-                } catch (SignatureException | MalformedJwtException | UnsupportedJwtException | IllegalArgumentException e) {
+                } catch (SignatureException | MalformedJwtException | UnsupportedJwtException |
+                         IllegalArgumentException e) {
                     // 抛出异常，统一让 AuthenticationEntryPoint 处理响应参数
                     authenticationEntryPoint.commence(request, response, new AuthenticationServiceException("Token 不可用"));
                     return;
