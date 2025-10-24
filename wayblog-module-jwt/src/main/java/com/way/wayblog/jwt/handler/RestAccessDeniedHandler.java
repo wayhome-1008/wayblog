@@ -1,5 +1,8 @@
 package com.way.wayblog.jwt.handler;
 
+import com.way.wayblog.common.enums.ResponseCodeEnum;
+import com.way.wayblog.common.utils.Response;
+import com.way.wayblog.jwt.utils.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -22,5 +25,6 @@ public class RestAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
         log.warn("登录成功访问收保护的资源，但是权限不够: ", accessDeniedException);
         // 预留，后面引入多角色时会用到
+        ResultUtil.fail(response, Response.fail(ResponseCodeEnum.FORBIDDEN));
     }
 }
