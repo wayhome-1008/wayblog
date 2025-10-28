@@ -31,7 +31,6 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
             ResultUtil.fail(response, HttpStatus.UNAUTHORIZED.value(), Response.fail(ResponseCodeEnum.UNAUTHORIZED));
             return;
         }
-
         ResultUtil.fail(response, HttpStatus.UNAUTHORIZED.value(), Response.fail(authException.getMessage()));
     }
 }
