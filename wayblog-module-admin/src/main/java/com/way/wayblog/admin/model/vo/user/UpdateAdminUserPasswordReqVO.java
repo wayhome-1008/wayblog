@@ -1,4 +1,4 @@
-package com.way.wayblog.admin.model.vo;
+package com.way.wayblog.admin.model.vo.user;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

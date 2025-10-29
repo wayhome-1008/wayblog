@@ -1,6 +1,6 @@
 package com.way.wayblog.admin.controller;
 
-import com.way.wayblog.admin.model.vo.UpdateAdminUserPasswordReqVO;
+import com.way.wayblog.admin.model.vo.user.UpdateAdminUserPasswordReqVO;
 import com.way.wayblog.admin.service.AdminUserService;
 import com.way.wayblog.common.aspect.ApiOperationLog;
 import com.way.wayblog.common.utils.Response;
@@ -25,6 +25,12 @@ public class AdminUserController {
 
     @Autowired
     private AdminUserService userService;
+    @PostMapping("/user/info")
+    @ApiOperation(value = "获取用户信息")
+    @ApiOperationLog(description = "获取用户信息")
+    public Response findUserInfo() {
+        return userService.findUserInfo();
+    }
 
     @PostMapping("/password/update")
     @ApiOperation(value = "修改用户密码")
