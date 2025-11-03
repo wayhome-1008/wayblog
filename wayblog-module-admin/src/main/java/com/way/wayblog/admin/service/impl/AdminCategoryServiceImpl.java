@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.way.wayblog.admin.model.vo.category.AddCategoryReqVO;
+import com.way.wayblog.admin.model.vo.category.DeleteCategoryReqVO;
 import com.way.wayblog.admin.model.vo.category.FindCategoryPageListReqVO;
 import com.way.wayblog.admin.model.vo.category.FindCategoryPageListRspVO;
 import com.way.wayblog.admin.service.AdminCategoryService;
@@ -106,4 +107,16 @@ public class AdminCategoryServiceImpl implements AdminCategoryService {
 
         return PageResponse.success(categoryDOPage, vos);
     }
+
+    @Override
+    public Response deleteCategory(DeleteCategoryReqVO deleteCategoryReqVO) {
+        // 分类 ID
+        Long categoryId = deleteCategoryReqVO.getId();
+
+        // 删除分类
+        categoryMapper.deleteById(categoryId);
+
+        return Response.success();
+    }
+
 }

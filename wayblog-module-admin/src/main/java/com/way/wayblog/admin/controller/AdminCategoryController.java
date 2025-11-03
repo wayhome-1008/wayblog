@@ -1,6 +1,7 @@
 package com.way.wayblog.admin.controller;
 
 import com.way.wayblog.admin.model.vo.category.AddCategoryReqVO;
+import com.way.wayblog.admin.model.vo.category.DeleteCategoryReqVO;
 import com.way.wayblog.admin.model.vo.category.FindCategoryPageListReqVO;
 import com.way.wayblog.admin.service.AdminCategoryService;
 import com.way.wayblog.common.aspect.ApiOperationLog;
@@ -41,6 +42,13 @@ public class AdminCategoryController {
     @ApiOperationLog(description = "添加分类")
     public Response addCategory(@RequestBody @Validated AddCategoryReqVO addCategoryReqVO) {
         return categoryService.addCategory(addCategoryReqVO);
+    }
+
+    @PostMapping("/category/delete")
+    @ApiOperation(value = "删除分类")
+    @ApiOperationLog(description = "删除分类")
+    public Response deleteCategory(@RequestBody @Validated DeleteCategoryReqVO deleteCategoryReqVO) {
+        return categoryService.deleteCategory(deleteCategoryReqVO);
     }
 
 

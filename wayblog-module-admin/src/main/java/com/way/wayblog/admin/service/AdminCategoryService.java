@@ -1,6 +1,7 @@
 package com.way.wayblog.admin.service;
 
 import com.way.wayblog.admin.model.vo.category.AddCategoryReqVO;
+import com.way.wayblog.admin.model.vo.category.DeleteCategoryReqVO;
 import com.way.wayblog.admin.model.vo.category.FindCategoryPageListReqVO;
 import com.way.wayblog.common.utils.PageResponse;
 import com.way.wayblog.common.utils.Response;
@@ -19,4 +20,11 @@ public interface AdminCategoryService {
      * @return
      */
     PageResponse findCategoryList(FindCategoryPageListReqVO findCategoryPageListReqVO);
+
+    /**
+     * 删除分类
+     * @param deleteCategoryReqVO
+     * @return
+     */
+    Response deleteCategory(DeleteCategoryReqVO deleteCategoryReqVO);
 }
