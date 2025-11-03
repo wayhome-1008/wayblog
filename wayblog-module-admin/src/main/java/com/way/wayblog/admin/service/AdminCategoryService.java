@@ -1,6 +1,8 @@
 package com.way.wayblog.admin.service;
 
 import com.way.wayblog.admin.model.vo.category.AddCategoryReqVO;
+import com.way.wayblog.admin.model.vo.category.FindCategoryPageListReqVO;
+import com.way.wayblog.common.utils.PageResponse;
 import com.way.wayblog.common.utils.Response;
 
 public interface AdminCategoryService {
@@ -10,4 +12,11 @@ public interface AdminCategoryService {
      * @return
      */
     Response addCategory(AddCategoryReqVO addCategoryReqVO);
+
+    /**
+     * 分类分页数据查询
+     * @param findCategoryPageListReqVO
+     * @return
+     */
+    PageResponse findCategoryList(FindCategoryPageListReqVO findCategoryPageListReqVO);
 }

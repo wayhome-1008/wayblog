@@ -1,8 +1,10 @@
 package com.way.wayblog.admin.controller;
 
 import com.way.wayblog.admin.model.vo.category.AddCategoryReqVO;
+import com.way.wayblog.admin.model.vo.category.FindCategoryPageListReqVO;
 import com.way.wayblog.admin.service.AdminCategoryService;
 import com.way.wayblog.common.aspect.ApiOperationLog;
+import com.way.wayblog.common.utils.PageResponse;
 import com.way.wayblog.common.utils.Response;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,6 +27,14 @@ public class AdminCategoryController {
 
     @Autowired
     private AdminCategoryService categoryService;
+
+    @PostMapping("/category/list")
+    @ApiOperation(value = "分类分页数据获取")
+    @ApiOperationLog(description = "分类分页数据获取")
+    public PageResponse findCategoryList(@RequestBody @Validated FindCategoryPageListReqVO findCategoryPageListReqVO) {
+        return categoryService.findCategoryList(findCategoryPageListReqVO);
+    }
+
 
     @PostMapping("/category/add")
     @ApiOperation(value = "添加分类")
