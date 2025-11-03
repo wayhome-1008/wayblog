@@ -12,6 +12,7 @@ import com.way.wayblog.common.domain.dos.CategoryDO;
 import com.way.wayblog.common.domain.mapper.CategoryMapper;
 import com.way.wayblog.common.enums.ResponseCodeEnum;
 import com.way.wayblog.common.exception.BizException;
+import com.way.wayblog.common.model.vo.SelectRspVO;
 import com.way.wayblog.common.utils.PageResponse;
 import com.way.wayblog.common.utils.Response;
 import lombok.extern.slf4j.Slf4j;
@@ -118,5 +119,27 @@ public class AdminCategoryServiceImpl implements AdminCategoryService {
 
         return Response.success();
     }
+
+    @Override
+    public Response findCategorySelectList() {
+        // 查询所有分类
+        List<CategoryDO> categoryDOS = categoryMapper.selectList(null);
+
+        // DO 转 VO
+        List<SelectRspVO> selectRspVOS = null;
+        // 如果分类数据不为空
+        if (!CollectionUtils.isEmpty(categoryDOS)) {
+            // 将分类 ID 作为 Value 值，将分类名称作为 label 展示
+            selectRspVOS = categoryDOS.stream()
+                    .map(categoryDO -> SelectRspVO.builder()
+                            .label(categoryDO.getName())
+                            .value(categoryDO.getId())
+                            .build())
+                    .collect(Collectors.toList());
+        }
+
+        return Response.success(selectRspVOS);
+    }
+
 
 }
