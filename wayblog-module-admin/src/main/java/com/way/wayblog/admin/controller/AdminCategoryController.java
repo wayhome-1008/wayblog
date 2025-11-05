@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *@Author: way
- *@CreateTime: 2025-11-03  14:20
- *@Description: TODO
+ * @Author: way
+ * @CreateTime: 2025-11-03  14:20
+ * @Description: TODO
  */
 @RestController
 @RequestMapping("/admin")
@@ -57,7 +57,6 @@ public class AdminCategoryController {
     public Response findCategorySelectList() {
         return categoryService.findCategorySelectList();
     }
-
 
 }
 
