@@ -19,10 +19,17 @@ public class MybatisPlusConfig {
      * @return
      */
     @Bean
-    public MybatisPlusInterceptor mybatisPlusInterceptor(){
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor());
         return interceptor;
     }
 
+    /**
+     * 自定义批量插入 SQL 注入器
+     */
+    @Bean
+    public InsertBatchSqlInjector insertBatchSqlInjector() {
+        return new InsertBatchSqlInjector();
+    }
 }
