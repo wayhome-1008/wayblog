@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 /**
  *@Author: way
  *@CreateTime: 2025-09-28  15:21
- *@Description: TODO
+ *@Description: 密码加密
  */
 @Configuration
 public class PasswordEncoderConfig {
