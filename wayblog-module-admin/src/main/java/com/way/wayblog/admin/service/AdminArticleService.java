@@ -1,5 +1,6 @@
 package com.way.wayblog.admin.service;
 
+import com.way.wayblog.admin.model.vo.article.DeleteArticleReqVO;
 import com.way.wayblog.admin.model.vo.article.PublishArticleReqVO;
 import com.way.wayblog.common.utils.Response;
 
@@ -10,5 +11,12 @@ public interface AdminArticleService {
      * @return
      */
     Response publishArticle(PublishArticleReqVO publishArticleReqVO);
+
+    /**
+     * 删除文章
+     * @param deleteArticleReqVO
+     * @return
+     */
+    Response deleteArticle(DeleteArticleReqVO deleteArticleReqVO);
 }
 

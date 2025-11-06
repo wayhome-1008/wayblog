@@ -2,6 +2,7 @@ package com.way.wayblog.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.google.common.collect.Lists;
+import com.way.wayblog.admin.model.vo.article.DeleteArticleReqVO;
 import com.way.wayblog.admin.model.vo.article.PublishArticleReqVO;
 import com.way.wayblog.admin.service.AdminArticleService;
 import com.way.wayblog.common.domain.dos.*;
@@ -91,6 +92,32 @@ public class AdminArticleServiceImpl implements AdminArticleService {
         // 4. 保存文章关联的标签集合
         List<String> publishTags = publishArticleReqVO.getTags();
         insertTags(articleId, publishTags);
+
+        return Response.success();
+    }
+
+    /**
+     * 删除文章
+     *
+     * @param deleteArticleReqVO
+     * @return
+     */
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Response deleteArticle(DeleteArticleReqVO deleteArticleReqVO) {
+        Long articleId = deleteArticleReqVO.getId();
+
+        // 1. 删除文章
+        articleMapper.deleteById(articleId);
+
+        // 2. 删除文章内容
+        articleContentMapper.deleteByArticleId(articleId);
+
+        // 3. 删除文章-分类关联记录
+        articleCategoryRelMapper.deleteByArticleId(articleId);
+
+        // 4. 删除文章-标签关联记录
+        articleTagRelMapper.deleteByArticleId(articleId);
 
         return Response.success();
     }
