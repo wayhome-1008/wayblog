@@ -1,0 +1,19 @@
+package com.way.wayblog.admin.convert;
+
+import com.way.wayblog.admin.model.vo.article.FindArticleDetailRspVO;
+import com.way.wayblog.common.domain.dos.ArticleDO;
+import org.mapstruct.factory.Mappers;
+
+public interface ArticleDetailConvert {
+    /**
+     * 初始化 convert 实例
+     */
+    ArticleDetailConvert INSTANCE = Mappers.getMapper(ArticleDetailConvert.class);
+
+    /**
+     * 将 DO 转化为 VO
+     * @param bean
+     * @return
+     */
+    FindArticleDetailRspVO convertDO2VO(ArticleDO bean);
+}

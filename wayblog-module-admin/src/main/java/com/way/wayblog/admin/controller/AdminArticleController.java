@@ -1,6 +1,7 @@
 package com.way.wayblog.admin.controller;
 
 import com.way.wayblog.admin.model.vo.article.DeleteArticleReqVO;
+import com.way.wayblog.admin.model.vo.article.FindArticleDetailReqVO;
 import com.way.wayblog.admin.model.vo.article.FindArticlePageListReqVO;
 import com.way.wayblog.admin.model.vo.article.PublishArticleReqVO;
 import com.way.wayblog.admin.service.AdminArticleService;
@@ -50,6 +51,13 @@ public class AdminArticleController {
     @ApiOperationLog(description = "查询文章分页数据")
     public Response findArticlePageList(@RequestBody @Validated FindArticlePageListReqVO findArticlePageListReqVO) {
         return articleService.findArticlePageList(findArticlePageListReqVO);
+    }
+
+    @PostMapping("/detail")
+    @ApiOperation(value = "查询文章详情")
+    @ApiOperationLog(description = "查询文章详情")
+    public Response findArticleDetail(@RequestBody @Validated FindArticleDetailReqVO findArticlePageListReqVO) {
+        return articleService.findArticleDetail(findArticlePageListReqVO);
     }
 
 }
