@@ -26,6 +26,14 @@ public class AdminBlogSettingsController {
     @Autowired
     private AdminBlogSettingsService blogSettingsService;
 
+    @PostMapping("/detail")
+    @ApiOperation(value = "获取博客设置详情")
+    @ApiOperationLog(description = "获取博客设置详情")
+    public Response findDetail() {
+        return blogSettingsService.findDetail();
+    }
+
+
     @PostMapping("/update")
     @ApiOperation(value = "博客基础信息修改")
     @ApiOperationLog(description = "博客基础信息修改")
