@@ -1,6 +1,10 @@
 package com.way.wayblog.admin.service;
 
 import com.way.wayblog.admin.model.vo.tag.AddTagReqVO;
+import com.way.wayblog.admin.model.vo.tag.DeleteTagReqVO;
+import com.way.wayblog.admin.model.vo.tag.FindTagPageListReqVO;
+import com.way.wayblog.admin.model.vo.tag.SearchTagReqVO;
+import com.way.wayblog.common.utils.PageResponse;
 import com.way.wayblog.common.utils.Response;
 
 /**
@@ -13,4 +17,10 @@ import com.way.wayblog.common.utils.Response;
  **/
 public interface AdminTagService {
     Response addTag(AddTagReqVO addTagReqVO);
+
+    PageResponse findTagList(FindTagPageListReqVO findTagPageListReqVO);
+
+    Response deleteTag(DeleteTagReqVO deleteTagReqVO);
+
+    Response searchTag(SearchTagReqVO searchTagReqVO);
 }

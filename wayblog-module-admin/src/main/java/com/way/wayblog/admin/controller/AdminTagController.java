@@ -4,6 +4,9 @@ import com.way.wayblog.admin.model.vo.category.AddCategoryReqVO;
 import com.way.wayblog.admin.model.vo.category.DeleteCategoryReqVO;
 import com.way.wayblog.admin.model.vo.category.FindCategoryPageListReqVO;
 import com.way.wayblog.admin.model.vo.tag.AddTagReqVO;
+import com.way.wayblog.admin.model.vo.tag.DeleteTagReqVO;
+import com.way.wayblog.admin.model.vo.tag.FindTagPageListReqVO;
+import com.way.wayblog.admin.model.vo.tag.SearchTagReqVO;
 import com.way.wayblog.admin.service.AdminCategoryService;
 import com.way.wayblog.admin.service.AdminTagService;
 import com.way.wayblog.common.aspect.ApiOperationLog;
@@ -33,12 +36,12 @@ public class AdminTagController {
     @Autowired
     private AdminTagService adminTagService;
 
-//    @PostMapping("/category/list")
-//    @ApiOperation(value = "分类分页数据获取")
-//    @ApiOperationLog(description = "分类分页数据获取")
-//    public PageResponse findCategoryList(@RequestBody @Validated FindCategoryPageListReqVO findCategoryPageListReqVO) {
-//        return categoryService.findCategoryList(findCategoryPageListReqVO);
-//    }
+    @PostMapping("/tag/list")
+    @ApiOperation(value = "标签分页数据获取")
+    @ApiOperationLog(description = "标签分页数据获取")
+    public PageResponse findTagList(@RequestBody @Validated FindTagPageListReqVO findTagPageListReqVO) {
+        return adminTagService.findTagList(findTagPageListReqVO);
+    }
 
 
     @PostMapping("/tag/add")
@@ -48,12 +51,20 @@ public class AdminTagController {
         return adminTagService.addTag(addTagReqVO);
     }
 
-//    @PostMapping("/category/delete")
-//    @ApiOperation(value = "删除分类")
-//    @ApiOperationLog(description = "删除分类")
-//    public Response deleteCategory(@RequestBody @Validated DeleteCategoryReqVO deleteCategoryReqVO) {
-//        return categoryService.deleteCategory(deleteCategoryReqVO);
-//    }
+    @PostMapping("/tag/delete")
+    @ApiOperation(value = "删除分类")
+    @ApiOperationLog(description = "删除分类")
+    public Response deleteCategory(@RequestBody @Validated DeleteTagReqVO deleteTagReqVO) {
+        return adminTagService.deleteTag(deleteTagReqVO);
+    }
+
+    @PostMapping("/tag/search")
+    @ApiOperation(value = "标签模糊查询")
+    @ApiOperationLog(description = "标签模糊查询")
+    public Response searchTag(@RequestBody @Validated SearchTagReqVO searchTagReqVO) {
+        return adminTagService.searchTag(searchTagReqVO);
+    }
+
 //
 //    @PostMapping("/category/select/list")
 //    @ApiOperation(value = "分类 Select 下拉列表数据获取")
