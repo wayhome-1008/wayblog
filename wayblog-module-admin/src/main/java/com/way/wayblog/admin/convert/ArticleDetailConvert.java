@@ -2,8 +2,9 @@ package com.way.wayblog.admin.convert;
 
 import com.way.wayblog.admin.model.vo.article.FindArticleDetailRspVO;
 import com.way.wayblog.common.domain.dos.ArticleDO;
+import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
-
+@Mapper
 public interface ArticleDetailConvert {
     /**
      * 初始化 convert 实例

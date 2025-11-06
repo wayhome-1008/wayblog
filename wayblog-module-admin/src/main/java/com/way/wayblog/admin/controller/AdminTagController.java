@@ -1,13 +1,9 @@
 package com.way.wayblog.admin.controller;
 
-import com.way.wayblog.admin.model.vo.category.AddCategoryReqVO;
-import com.way.wayblog.admin.model.vo.category.DeleteCategoryReqVO;
-import com.way.wayblog.admin.model.vo.category.FindCategoryPageListReqVO;
 import com.way.wayblog.admin.model.vo.tag.AddTagReqVO;
 import com.way.wayblog.admin.model.vo.tag.DeleteTagReqVO;
 import com.way.wayblog.admin.model.vo.tag.FindTagPageListReqVO;
 import com.way.wayblog.admin.model.vo.tag.SearchTagReqVO;
-import com.way.wayblog.admin.service.AdminCategoryService;
 import com.way.wayblog.admin.service.AdminTagService;
 import com.way.wayblog.common.aspect.ApiOperationLog;
 import com.way.wayblog.common.utils.PageResponse;
@@ -65,12 +61,11 @@ public class AdminTagController {
         return adminTagService.searchTag(searchTagReqVO);
     }
 
-//
-//    @PostMapping("/category/select/list")
-//    @ApiOperation(value = "分类 Select 下拉列表数据获取")
-//    @ApiOperationLog(description = "分类 Select 下拉列表数据获取")
-//    public Response findCategorySelectList() {
-//        return categoryService.findCategorySelectList();
-//    }
+    @PostMapping("/tag/select/list")
+    @ApiOperation(value = "查询标签 Select 列表数据")
+    @ApiOperationLog(description = "查询标签 Select 列表数据")
+    public Response findTagSelectList() {
+        return adminTagService.findTagSelectList();
+    }
 
 }

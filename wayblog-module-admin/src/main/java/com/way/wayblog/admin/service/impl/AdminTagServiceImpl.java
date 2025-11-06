@@ -1,17 +1,20 @@
 package com.way.wayblog.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.way.wayblog.admin.model.vo.tag.*;
 import com.way.wayblog.admin.service.AdminTagService;
+import com.way.wayblog.common.domain.dos.ArticleTagRelDO;
 import com.way.wayblog.common.domain.dos.TagDO;
+import com.way.wayblog.common.domain.mapper.ArticleTagRelMapper;
 import com.way.wayblog.common.domain.mapper.TagMapper;
 import com.way.wayblog.common.enums.ResponseCodeEnum;
+import com.way.wayblog.common.exception.BizException;
 import com.way.wayblog.common.model.vo.SelectRspVO;
 import com.way.wayblog.common.utils.PageResponse;
 import com.way.wayblog.common.utils.Response;
-import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -34,7 +38,8 @@ import java.util.stream.Collectors;
 public class AdminTagServiceImpl extends ServiceImpl<TagMapper, TagDO> implements AdminTagService {
     @Autowired
     private TagMapper tagMapper;
-
+    @Autowired
+    private ArticleTagRelMapper articleTagRelMapper;
     @Override
     public Response addTag(AddTagReqVO addTagReqVO) {
         List<TagDO> tagDOS = addTagReqVO.getTags()
@@ -75,9 +80,21 @@ public class AdminTagServiceImpl extends ServiceImpl<TagMapper, TagDO> implement
 
     @Override
     public Response deleteTag(DeleteTagReqVO deleteTagReqVO) {
-        Long id = deleteTagReqVO.getId();
-        int count = tagMapper.deleteById(id);
-        return count == 1 ? Response.success() : Response.fail(ResponseCodeEnum.TAG_NOT_EXIST);
+        // 标签 ID
+        Long tagId = deleteTagReqVO.getId();
+
+        // 校验该标签下是否有关联的文章，若有，则不允许删除，提示用户需要先删除标签下的文章
+        ArticleTagRelDO articleTagRelDO = articleTagRelMapper.selectOneByTagId(tagId);
+
+        if (Objects.nonNull(articleTagRelDO)) {
+            log.warn("==> 此标签下包含文章，无法删除，tagId: {}", tagId);
+            throw new BizException(ResponseCodeEnum.TAG_CAN_NOT_DELETE);
+        }
+
+        // 根据标签 ID 删除
+        int count = tagMapper.deleteById(tagId);
+
+        return count == 1 ? Response.success() : Response.fail(ResponseCodeEnum.TAG_NOT_EXISTED);
     }
 
     @Override
@@ -94,4 +111,24 @@ public class AdminTagServiceImpl extends ServiceImpl<TagMapper, TagDO> implement
         }
         return Response.success(vos);
     }
+
+    @Override
+    public Response findTagSelectList() {
+        // 查询所有标签, Wrappers.emptyWrapper() 表示查询条件为空
+        List<TagDO> tagDOS = tagMapper.selectList(Wrappers.emptyWrapper());
+
+        // DO 转 VO
+        List<SelectRspVO> vos = null;
+        if (!CollectionUtils.isEmpty(tagDOS)) {
+            vos = tagDOS.stream()
+                    .map(tagDO -> SelectRspVO.builder()
+                            .label(tagDO.getName())
+                            .value(tagDO.getId())
+                            .build())
+                    .collect(Collectors.toList());
+        }
+
+        return Response.success(vos);
+    }
+
 }
