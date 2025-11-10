@@ -1,6 +1,7 @@
 package com.way.wayblog.web.service;
 
 import com.way.wayblog.common.utils.Response;
+import com.way.wayblog.web.model.vo.category.FindCategoryArticlePageListReqVO;
 
 public interface CategoryService {
     /**
@@ -8,5 +9,12 @@ public interface CategoryService {
      * @return
      */
     Response findCategoryList();
+
+    /**
+     * 获取分类下文章分页数据
+     * @param findCategoryArticlePageListReqVO
+     * @return
+     */
+    Response findCategoryArticlePageList(FindCategoryArticlePageListReqVO findCategoryArticlePageListReqVO);
 }
 
