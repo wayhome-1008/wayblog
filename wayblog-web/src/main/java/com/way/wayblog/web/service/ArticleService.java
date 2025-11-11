@@ -1,6 +1,7 @@
 package com.way.wayblog.web.service;
 
 import com.way.wayblog.common.utils.Response;
+import com.way.wayblog.web.model.vo.article.FindArticleDetailReqVO;
 import com.way.wayblog.web.model.vo.article.FindIndexArticlePageListReqVO;
 
 public interface ArticleService {
@@ -10,5 +11,12 @@ public interface ArticleService {
      * @return
      */
     Response findArticlePageList(FindIndexArticlePageListReqVO findIndexArticlePageListReqVO);
+
+    /**
+     * 获取文章详情
+     * @param findArticleDetailReqVO
+     * @return
+     */
+    Response findArticleDetail(FindArticleDetailReqVO findArticleDetailReqVO);
 }
 

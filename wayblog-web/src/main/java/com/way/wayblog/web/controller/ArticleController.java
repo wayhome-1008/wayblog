@@ -2,6 +2,7 @@ package com.way.wayblog.web.controller;
 
 import com.way.wayblog.common.aspect.ApiOperationLog;
 import com.way.wayblog.common.utils.Response;
+import com.way.wayblog.web.model.vo.article.FindArticleDetailReqVO;
 import com.way.wayblog.web.model.vo.article.FindIndexArticlePageListReqVO;
 import com.way.wayblog.web.service.ArticleService;
 import io.swagger.annotations.Api;
@@ -29,6 +30,14 @@ public class ArticleController {
     public Response findArticlePageList(@RequestBody FindIndexArticlePageListReqVO findIndexArticlePageListReqVO) {
         return articleService.findArticlePageList(findIndexArticlePageListReqVO);
     }
+
+    @PostMapping("/detail")
+    @ApiOperation(value = "获取文章详情")
+    @ApiOperationLog(description = "获取文章详情")
+    public Response findArticleDetail(@RequestBody FindArticleDetailReqVO findArticleDetailReqVO) {
+        return articleService.findArticleDetail(findArticleDetailReqVO);
+    }
+
 
 }
 
