@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.google.common.collect.Lists;
-import com.way.wayblog.web.model.vo.article.FindArticleDetailRspVO;
+import com.way.wayblog.admin.event.ReadArticleEvent;
 import com.way.wayblog.common.domain.dos.*;
 import com.way.wayblog.common.domain.mapper.*;
 import com.way.wayblog.common.enums.ResponseCodeEnum;
@@ -19,15 +19,13 @@ import com.way.wayblog.common.utils.PageResponse;
 import com.way.wayblog.common.utils.Response;
 import com.way.wayblog.web.convert.ArticleConvert;
 import com.way.wayblog.web.markdown.MarkdownHelper;
-import com.way.wayblog.web.model.vo.article.FindArticleDetailReqVO;
-import com.way.wayblog.web.model.vo.article.FindIndexArticlePageListReqVO;
-import com.way.wayblog.web.model.vo.article.FindIndexArticlePageListRspVO;
-import com.way.wayblog.web.model.vo.article.FindPreNextArticleRspVO;
+import com.way.wayblog.web.model.vo.article.*;
 import com.way.wayblog.web.model.vo.category.FindCategoryListRspVO;
 import com.way.wayblog.web.model.vo.tag.FindTagListRspVO;
 import com.way.wayblog.web.service.ArticleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,6 +50,8 @@ public class ArticleServiceImpl implements ArticleService {
     private TagMapper tagMapper;
     @Autowired
     private ArticleTagRelMapper articleTagRelMapper;
+    @Autowired
+    private ApplicationEventPublisher eventPublisher;
 
     /**
      * 获取首页文章分页数据
@@ -208,7 +208,8 @@ public class ArticleServiceImpl implements ArticleService {
                     .build();
             vo.setNextArticle(nextArticleVO);
         }
-
+// 发布文章阅读事件
+        eventPublisher.publishEvent(new ReadArticleEvent(this, articleId));
         return Response.success(vo);
     }
 
